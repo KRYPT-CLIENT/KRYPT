@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090c">
+  <meta name="description" content="KRYPT Client — updates, features, and releases for the Minecraft client project.">
+  <title>KRYPT Client</title>
+  <style>
+    :root{color-scheme:dark;--bg:#08090c;--panel:#101217;--panel2:#0c0e12;--line:#272b34;--text:#f1f3f7;--muted:#a0a6b3;--blue:#287cff;--max:1120px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.7 Inter,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(var(--max),calc(100% - 44px));margin:auto}
+    header{height:68px;position:sticky;top:0;z-index:20;background:rgba(8,9,12,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:22px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:850;letter-spacing:.1em;font-size:13px;white-space:nowrap}
+    .mark{width:33px;height:33px;border:1px solid #4c5565;border-radius:50%;display:grid;place-items:center;color:#58a0ff;font-size:12px;letter-spacing:-.06em}
+    nav{display:flex;gap:24px;align-items:center;color:#b5bac4;font-size:13px}nav a:hover,nav a.active{color:#fff}
+    .nav-right{display:flex;align-items:center;gap:12px}.version{font-size:11px;color:#aab2c0;border:1px solid var(--line);padding:4px 8px;border-radius:5px}
+    .button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:0 15px;border:1px solid #3a404b;border-radius:6px;font-size:13px;font-weight:700;transition:.15s ease}
+    .button:hover{background:#191c23;border-color:#606978}.primary{background:var(--blue);border-color:var(--blue);color:white}.primary:hover{background:#1769e8;border-color:#1769e8}
+    .hero{padding:110px 0 96px;border-bottom:1px solid var(--line);min-height:520px;display:flex;align-items:center}
+    .hero-inner{max-width:790px}.eyebrow{display:flex;align-items:center;gap:9px;color:#a8b0bf;text-transform:uppercase;letter-spacing:.15em;font-size:11px;font-weight:750}
+    .dot{height:6px;width:6px;border-radius:50%;background:#4d9aff}
+    h1{font-size:clamp(54px,8.5vw,92px);line-height:.98;letter-spacing:-.075em;margin:22px 0 25px;font-weight:900}
+    h1 span{color:var(--blue)}.hero p{max-width:610px;color:#aab0bc;font-size:17px;line-height:1.8;margin:0}
+    .actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:30px}.hero-meta{margin-top:24px;color:#777f8d;font-size:12px}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}
+    .stat{padding:23px 20px 23px 0}.stat+.stat{border-left:1px solid var(--line);padding-left:24px}.stat-label{display:block;color:#7f8795;font-size:10px;text-transform:uppercase;letter-spacing:.14em;margin-bottom:5px}.stat strong{font-size:14px;font-weight:650}
+    section.block{padding:94px 0;border-bottom:1px solid var(--line)}.section-top{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:32px}
+    .kicker{color:#5c9eff;text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:800}
+    h2{font-size:clamp(30px,4.5vw,43px);letter-spacing:-.055em;line-height:1.12;margin:9px 0 12px}
+    .section-desc{color:var(--muted);max-width:620px;margin:0}.section-link{font-size:12px;color:#b9c0cb;white-space:nowrap;border-bottom:1px solid #525866;padding-bottom:4px}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+    .feature{padding:26px 25px 30px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:190px;background:transparent}
+    .feature-num{font-size:11px;color:#5b9cff;letter-spacing:.1em;font-weight:800}.feature h3{font-size:16px;margin:22px 0 8px}.feature p{font-size:13px;color:#9ea5b2;margin:0;line-height:1.8}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}.about-copy p{color:#a3aab7;margin:0 0 16px}
+    .principles{border-top:1px solid var(--line)}.principle{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:17px 0;border-bottom:1px solid var(--line)}.principle span{color:#788292;font-size:11px;text-transform:uppercase;letter-spacing:.08em}.principle strong{font-size:13px;font-weight:650}
+    .roadmap{border-top:1px solid var(--line)}.road-item{display:grid;grid-template-columns:150px 1fr 120px;gap:22px;padding:23px 0;border-bottom:1px solid var(--line);align-items:start}.road-phase{color:#929aa8;font-size:12px}.road-item h3{margin:0 0 5px;font-size:15px}.road-item p{margin:0;color:#969eac;font-size:13px}.tag{justify-self:end;border:1px solid var(--line);padding:3px 8px;border-radius:4px;color:#a8b0bd;font-size:10px;white-space:nowrap}.tag.current{color:#8ebaff;border-color:#254a7c;background:#0c1728}
+    .download-box{display:flex;align-items:center;justify-content:space-between;gap:35px;border:1px solid #303744;background:#0d1016;padding:34px;border-radius:8px}.download-box h2{font-size:27px}.download-box p{margin:0;color:#9fa7b4;font-size:13px;max-width:580px}
+    .release-row{display:flex;align-items:center;gap:15px;margin-top:20px;color:#a0a8b5;font-size:12px}.release-icon{width:37px;height:37px;border:1px solid var(--line);display:grid;place-items:center;border-radius:6px;color:#80b4ff}
+    footer{padding:27px 0;color:#7e8693;font-size:11px}.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.footer-links{display:flex;gap:18px}.footer-links a:hover{color:#fff}
+    @media(max-width:760px){header{height:auto;min-height:65px}.nav{padding:12px 0;flex-wrap:wrap}.nav-right{margin-left:auto}nav{order:3;width:100%;overflow-x:auto;padding:5px 0 2px;gap:20px}.hero{padding:76px 0;min-height:0}.stats{grid-template-columns:1fr}.stat,.stat+.stat{padding:15px 0;border-left:0;border-bottom:1px solid var(--line)}.stat:last-child{border-bottom:0}.section-top{display:block}.section-link{display:inline-block;margin-top:17px}.feature-grid{grid-template-columns:1fr}.feature{min-height:0;padding:22px}.feature h3{margin-top:14px}.about-grid{grid-template-columns:1fr;gap:30px}.road-item{grid-template-columns:1fr auto;gap:8px 14px}.road-phase{grid-column:1/-1}.road-item>div:nth-child(2){grid-column:1/-1}.tag{grid-column:2;grid-row:2}.download-box{align-items:flex-start;flex-direction:column;padding:25px}.footer-inner{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home"><span class="mark">K.</span><span>KRYPT CLIENT</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a><a href="#features">Features</a><a href="#about">About</a><a href="#roadmap">Roadmap</a><a href="#downloads">Downloads</a>
+    </nav>
+    <div class="nav-right"><span class="version">IN DEVELOPMENT</span></div>
+  </div>
+</header>
+<main>
+  <section class="hero" id="home">
+    <div class="wrap hero-inner">
+      <div class="eyebrow"><span class="dot"></span> Independent Minecraft client</div>
+      <h1>Make the game<br>feel like <span>yours.</span></h1>
+      <p>KRYPT is a Minecraft client project focused on a clean interface, practical customization, and a no-nonsense player experience. Follow development and check back for releases.</p>
+      <div class="actions"><a class="button primary" href="#downloads">View downloads ↗</a><a class="button" href="https://github.com/KRYPT-CLIENT/KRYPT">Browse source code ↗</a></div>
+      <div class="hero-meta">No public build available yet. Development updates will be posted here.</div>
+    </div>
+  </section>
+
+  <div class="wrap stats">
+    <div class="stat"><span class="stat-label">Project</span><strong>KRYPT Client</strong></div>
+    <div class="stat"><span class="stat-label">Current status</span><strong>In development</strong></div>
+    <div class="stat"><span class="stat-label">Updates & source</span><strong><a href="https://github.com/KRYPT-CLIENT/KRYPT">GitHub repository ↗</a></strong></div>
+  </div>
+
+  <section class="block" id="features">
+    <div class="wrap">
+      <div class="section-top">
+        <div><div class="kicker">01 / Features</div><h2>Built around what matters.</h2><p class="section-desc">The aim is to keep the client straightforward: useful options, a consistent interface, and clear information about what each release includes.</p></div>
+        <a class="section-link" href="https://github.com/KRYPT-CLIENT/KRYPT/issues">Suggest a feature ↗</a>
+      </div>
+      <div class="feature-grid">
+        <article class="feature"><div class="feature-num">FEATURE 001</div><h3>A clean interface</h3><p>Settings should be easy to navigate and the visual design should stay out of the way while you play.</p></article>
+        <article class="feature"><div class="feature-num">FEATURE 002</div><h3>Personal customization</h3><p>A foundation for player preferences, visual options, and a setup that feels personal.</p></article>
+        <article class="feature"><div class="feature-num">FEATURE 003</div><h3>Performance in mind</h3><p>Responsiveness is a design goal. Performance claims will be based on testing, not promises.</p></article>
+        <article class="feature"><div class="feature-num">FEATURE 004</div><h3>Clear release notes</h3><p>Each public build can document changes, known issues, and compatibility information in one place.</p></article>
+        <article class="feature"><div class="feature-num">FEATURE 005</div><h3>Simple updates</h3><p>Project files, issues, and future downloads are linked directly through the KRYPT GitHub repository.</p></article>
+        <article class="feature"><div class="feature-num">FEATURE 006</div><h3>Community feedback</h3><p>Ideas and bug reports can be collected through GitHub issues as the project takes shape.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="wrap about-grid">
+      <div>
+        <div class="kicker">02 / About KRYPT</div>
+        <h2>A client project, built in public.</h2>
+      </div>
+      <div class="about-copy">
+        <p>KRYPT is an independent project for Minecraft players. This site is the home for project information, development notes, and future releases.</p>
+        <p>The project is still being developed, so the feature list may change. When builds are available, this page should point to the actual downloads and explain which Minecraft versions they support.</p>
+        <p>Want to follow along or contribute? The repository is the best place to find the source, report problems, and suggest improvements.</p>
+        <a class="button" href="https://github.com/KRYPT-CLIENT/KRYPT">Visit GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="roadmap">
+    <div class="wrap">
+      <div class="section-top">
+        <div><div class="kicker">03 / Roadmap</div><h2>What's next.</h2><p class="section-desc">A simple outline of the work ahead. Statuses can be updated as development progresses.</p></div>
+      </div>
+      <div class="roadmap">
+        <div class="road-item"><div class="road-phase">Phase 01</div><div><h3>Project foundation</h3><p>Set up the repository, project structure, and basic public information.</p></div><span class="tag current">In progress</span></div>
+        <div class="road-item"><div class="road-phase">Phase 02</div><div><h3>Core client experience</h3><p>Develop the core features and establish the settings and customization approach.</p></div><span class="tag">Planned</span></div>
+        <div class="road-item"><div class="road-phase">Phase 03</div><div><h3>Testing and compatibility</h3><p>Test supported versions, resolve issues, and document known limitations.</p></div><span class="tag">Planned</span></div>
+        <div class="road-item"><div class="road-phase">Phase 04</div><div><h3>First public release</h3><p>Publish a build with release notes and download instructions when it's ready.</p></div><span class="tag">Planned</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="downloads">
+    <div class="wrap">
+      <div class="kicker">04 / Downloads</div>
+      <h2>Releases and updates.</h2>
+      <p class="section-desc" style="margin-bottom:25px">No public build is listed yet. Use the official repository to follow progress and check for releases.</p>
+      <div class="download-box">
+        <div><h2>Nothing to install just yet.</h2><p>When KRYPT has a public build, the release notes and download files will be published on GitHub. Avoid unofficial downloads claiming to be KRYPT.</p>
+          <div class="release-row"><span class="release-icon">↗</span><span>Official release page<br><strong style="color:#e1e5ec">github.com/KRYPT-CLIENT/KRYPT/releases</strong></span></div>
+        </div>
+        <a class="button primary" href="https://github.com/KRYPT-CLIENT/KRYPT/releases">Open releases ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap footer-inner">
+    <span>© <span id="year"></span> KRYPT Client</span>
+    <div class="footer-links"><a href="https://github.com/KRYPT-CLIENT/KRYPT">GitHub</a><a href="https://github.com/KRYPT-CLIENT/KRYPT/issues">Issues</a><a href="https://github.com/KRYPT-CLIENT/KRYPT/releases">Releases</a></div>
+    <span>Not affiliated with Mojang or Microsoft.</span>
+  </div>
+</footer>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
